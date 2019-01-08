@@ -28,7 +28,11 @@ $.fn.revel = function(passedOptions) {
 		};
 
 		var $this = $(this);
-		var classnames = $this.data("revel") ? $this.data("revel") : 'opacity-0 scale90';
+
+		// boolen flag to unobserve after first run
+		if ($this.data("revel")) {
+			options.classes = $this.data('revel');
+		}
 
 		// boolen flag to unobserve after first run
 		if ($this.attr('data-revel-once')) {
@@ -72,7 +76,7 @@ $.fn.revel = function(passedOptions) {
 				css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
 
 				// apply action specific css if it changed
-				$this.css(css).removeClass(classnames);
+				$this.css(css).removeClass(classes);
 				
 				// unobserve when once flag defined
 				if (options.once) {
@@ -85,7 +89,7 @@ $.fn.revel = function(passedOptions) {
 
 				css.transitionDelay = options.delayHide ? options.delayHide : options.delay;
 
-				$this.css(css).addClass(classnames);
+				$this.css(css).addClass(classes);
 			}
 
 		}, options);
