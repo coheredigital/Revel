@@ -76,7 +76,7 @@ $.fn.revel = function(passedOptions) {
 				css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
 
 				// apply action specific css if it changed
-				$this.css(css).removeClass(classes);
+				$this.css(css).removeClass(options.classes);
 				
 				// unobserve when once flag defined
 				if (options.once) {
@@ -89,7 +89,7 @@ $.fn.revel = function(passedOptions) {
 
 				css.transitionDelay = options.delayHide ? options.delayHide : options.delay;
 
-				$this.css(css).addClass(classes);
+				$this.css(css).addClass(options.classes);
 			}
 
 		}, options);
