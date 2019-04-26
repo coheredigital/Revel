@@ -55,6 +55,17 @@ $.fn.revel = function(passedOptions) {
 			options.delayShow = $this.data('revel-delay-show');
 		}
 
+		// intersection obeserver overrides
+		if ($this.data('revel-rootmargin')) {
+			options.rootMargin = $this.data('revel-rootmargin');
+		}
+		if ($this.data('revel-entrythreshold')) {
+			options.entryThreshold = parseFloat($this.data('revel-entrythreshold'));
+		}
+		if ($this.data('revel-exitthreshold')) {
+			options.exitThreshold = parseFloat($this.data('revel-exitthreshold'));
+		}
+
 		// apply style options
 		css.transitionDuration = options.duration;
 		css.transitionDelay = options.delay;
@@ -70,7 +81,6 @@ $.fn.revel = function(passedOptions) {
 			
 			var entry = entries[0];
 			
-			// show
 			if (entry.intersectionRatio > options.entryThreshold) {
 				// css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
 				css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
