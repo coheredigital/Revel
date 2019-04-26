@@ -11,7 +11,7 @@ $.fn.revel = function(passedOptions) {
 		// custom options
 		once: false,
 		duration: "0.5s",
-		delay: "0s",
+		delayShowHide: "0.1s",
 		delayShow: false,
 		delayHide: false,
 
@@ -68,12 +68,16 @@ $.fn.revel = function(passedOptions) {
 
 		// apply style options
 		css.transitionDuration = options.duration;
-		css.transitionDelay = options.delay;
+		css.transitionDelay = options.delayShowHide;
 
 		// applt the transition css
 		$this.css(css);
 
-		var intersectionObserver = new IntersectionObserver(function(entries) {
+		
+
+		
+
+		var observer = new IntersectionObserver(function(entries) {
 
 			if (!entries && entries.length == 0) {
 				return;
@@ -82,8 +86,8 @@ $.fn.revel = function(passedOptions) {
 			var entry = entries[0];
 			
 			if (entry.intersectionRatio > options.entryThreshold) {
-				// css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
-				css.transitionDelay = options.delayShow ? options.delayShow : options.delay;
+
+				css.transitionDelay = options.delayShow ? options.delayShow : options.delayShowHide;
 
 				// apply action specific css if it changed
 				$this.css(css).removeClass(options.classes);
@@ -97,13 +101,13 @@ $.fn.revel = function(passedOptions) {
 			// hide
 			if (entry.intersectionRatio <= options.exitThreshold) {
 
-				css.transitionDelay = options.delayHide ? options.delayHide : options.delay;
+				css.transitionDelay = options.delayHide ? options.delayHide : options.delayShowHide;
 
 				$this.css(css).addClass(options.classes);
 			}
 
 		}, options);
 
-        intersectionObserver.observe(this);
+        observer.observe(this);
     });
 };
